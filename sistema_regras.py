@@ -3,30 +3,35 @@ from semaforo import Semaforo
 class SistemaRegras:
     def __init__(self, semaforos):
         self.semaforos = semaforos
+        self.semaforo_atual = None  #Semáforo atualmente aberto
 
     def aplicar_regras(self, fila_veiculos):
+        #Se não houver um semáforo aberto ou ele já passou o tempo mínimo aberto
+        if self.semaforo_atual is None or self.semaforo_atual.tempo_aberto >= 10:
+            #Semáforo com a maior fila
+            direcao_maior_fila = max(fila_veiculos, key=lambda direcao: len(fila_veiculos[direcao]))
+            semaforo_prioritario = next((s for s in self.semaforos if s.direcao == direcao_maior_fila), None)
+
+            #Abrir o semáforo prioritário se o tempo mínimo de troca passou
+            if semaforo_prioritario and semaforo_prioritario != self.semaforo_atual:
+                self.abrir_semaforo(semaforo_prioritario)
+
+        #Atualizar os tempos e fechar o semáforo atual após o tempo de abertura mínimo
         for semaforo in self.semaforos:
-            #Regra 1: Abrir se há mais de 3 veículos e o semáforo está fechado há mais de 10 segundos
-            if len(fila_veiculos[semaforo.direcao]) > 3 and semaforo.tempo_fechado > 10:
-                self.abrir_semaforo(semaforo)
-
-            #Regra 2: Fechar após 15 segundos de aberto
-            elif semaforo.tempo_aberto > 15:
+            #Fechar o semáforo atual se ele já ficou aberto por tempo suficiente
+            if semaforo == self.semaforo_atual and semaforo.tempo_aberto >= 10:
                 semaforo.fechar()
+                self.semaforo_atual = None  #Libera para abrir outro semáforo
 
-            #Regra 3: Abrir se fechado por mais de 20 segundos e há veículos esperando
-            elif semaforo.tempo_fechado > 20 and len(fila_veiculos[semaforo.direcao]) > 0:
-                self.abrir_semaforo(semaforo)
-
-            #Regra 4: Fechar se não houver mais veículos
-            elif len(fila_veiculos[semaforo.direcao]) == 0 and semaforo.estado == 'aberto':
-                semaforo.fechar()
-
-            # Atualizar tempos de abertura/fechamento
+            #Atualiza os tempos de aberto e fechado
             semaforo.atualizar_tempo()
 
     def abrir_semaforo(self, semaforo):
+        #Fecha todos os outros semáforos antes de abrir o novo prioritário
         for s in self.semaforos:
             if s != semaforo:
                 s.fechar()
         semaforo.abrir()
+
+        #Semáfaro atual para garantir que ele fique aberto por tempo mínimo (10s)
+        self.semaforo_atual = semaforo

@@ -1,7 +1,7 @@
 class Semaforo:
     def __init__(self, direcao):
         self.direcao = direcao
-        self.estado = 'fechado'  # posso deixar 'aberto' ou 'fechado'
+        self.estado = 'fechado'
         self.tempo_aberto = 0
         self.tempo_fechado = 0
 
