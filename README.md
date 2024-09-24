@@ -1,17 +1,11 @@
-Simulação de Trânsito Inteligente
-1. Descrição do Sistema
-•	Componentes Principais:
-- Sistema Baseado em Regras: Controla os semáforos com base na quantidade de veículos e no tempo de espera.
-- Sistemas Multiagente: Simula a interação entre semáforos e veículos.
-•	Fluxo do Sistema:
-- Veículos se aproximam do cruzamento.
-- O sistema avalia as filas de espera e o tempo de espera dos semáforos.
-- O semáforo é acionado com base nas regras definidas.
-2. Regras de Controle do Semáforo
-•	Regras Implementadas:
-- Onde houver mais veículos esperando depois de 10 segundos, abrir o semáforo para essa direção.
-- O semáforo muda de estado (vermelho/verde) com base na fila de veículos e no tempo de espera acumulado.
-- O tempo de abertura mínimo do semáforo é 10 segundos.
-3. Conclusão
-•	Resultados: Apresentar como o sistema gerencia o fluxo de trânsito de forma eficiente.
-•	Possíveis Melhorias: Discussão sobre a adição de mais regras, como veículos especiais, ou a integração de sensores reais.
+# Simulação de Trânsito Inteligente
+
+Este projeto é desenvolvido utilizando Python e uma interface gráfica com tkinter.
+
+O objetivo é simular o funcionamento de um cruzamento de semáforos controlados de forma inteligente, com base no número de veículos esperando em cada direção. O sistema toma decisões baseadas em regras para abrir e fechar os semáforos de maneira eficiente, priorizando a fila com mais veículos esperando e respeitando tempos mínimos de abertura para que sejam abertos da mesma maneira sempre.
+
+# Funcionalidades 
+- Simulação de Cruzamento: O sistema controla quatro semáforos (Norte, Sul, Leste e Oeste) em um cruzamento.
+- Gerenciamento Inteligente de Semáforos: Os semáforos são controlados por um sistema de regras que prioriza a direção com mais veículos esperando.
+- Controle de Tempo: Os semáforos permanecem abertos por um tempo mínimo antes de trocar, garantindo transições suaves e evitando trocas muito rápidas.
+- Interface Gráfica Interativa: A simulação conta com uma interface gráfica simples onde o usuário pode visualizar o estado dos semáforos e o número de veículos em cada fila.
