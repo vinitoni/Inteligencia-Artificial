@@ -5,17 +5,17 @@ from sistema_regras import SistemaRegras
 class SimulacaoTransito:
     def __init__(self):
         self.semaforos = [
-            Semaforo('Norte'),
-            Semaforo('Sul'),
-            Semaforo('Leste'),
-            Semaforo('Oeste')
+            Semaforo('1'),
+            Semaforo('2'),
+            Semaforo('3'),
+            Semaforo('4')
         ]
         self.regras = SistemaRegras(self.semaforos)
         self.fila_veiculos = {
-            'Norte': [],
-            'Sul': [],
-            'Leste': [],
-            'Oeste': []
+            '1': [],
+            '2': [],
+            '3': [],
+            '4': []
         }
 
     def adicionar_veiculo(self, direcao):
@@ -24,12 +24,12 @@ class SimulacaoTransito:
         print(f"Veículo adicionado na fila {direcao}. Total: {len(self.fila_veiculos[direcao])} veículos.")
 
     def simular_tick(self):
-        # Simular chegada aleatória de veículos
+        #Simular chegada aleatória de veículos
         import random
-        direcao_aleatoria = random.choice(['Norte', 'Sul', 'Leste', 'Oeste'])
+        direcao_aleatoria = random.choice(['1', '2', '3', '4'])
         self.adicionar_veiculo(direcao_aleatoria)
 
-        # Aplicar regras de controle dos semáforos
+        #Aplicar regras de controle dos semáforos
         self.regras.aplicar_regras(self.fila_veiculos)
 
         # Simular passagem de veículos (remover veículo da fila se o semáforo estiver aberto)

@@ -23,26 +23,26 @@ class InterfaceGrafica:
         self.titulo = tk.Label(self.root, text="Simulação de Trânsito Inteligente", font=("Arial", 16))
         self.titulo.grid(row=0, column=0, columnspan=4, pady=10)
 
-        self.label_norte = tk.Label(self.root, text="Norte", bg="red", width=10, height=2)
-        self.label_sul = tk.Label(self.root, text="Sul", bg="red", width=10, height=2)
-        self.label_leste = tk.Label(self.root, text="Leste", bg="red", width=10, height=2)
-        self.label_oeste = tk.Label(self.root, text="Oeste", bg="red", width=10, height=2)
+        self.label_1 = tk.Label(self.root, text="1", bg="red", width=10, height=2)
+        self.label_2 = tk.Label(self.root, text="2", bg="red", width=10, height=2)
+        self.label_3 = tk.Label(self.root, text="3", bg="red", width=10, height=2)
+        self.label_4 = tk.Label(self.root, text="4", bg="red", width=10, height=2)
 
-        # Posição dos semáforos
-        self.label_norte.grid(row=1, column=1, sticky="n", pady=(10, 0))
-        self.label_sul.grid(row=3, column=1, sticky="s", pady=(0, 10))
-        self.label_leste.grid(row=2, column=2, sticky="e", padx=(0, 10))
-        self.label_oeste.grid(row=2, column=0, sticky="w", padx=(10, 0))
+        #Posição dos semáforos
+        self.label_1.grid(row=1, column=1, sticky="n", pady=(10, 0))
+        self.label_2.grid(row=3, column=1, sticky="s", pady=(0, 10))
+        self.label_3.grid(row=2, column=2, sticky="e", padx=(0, 10))
+        self.label_4.grid(row=2, column=0, sticky="w", padx=(10, 0))
 
-        self.label_fila_norte = tk.Label(self.root, text="Fila Norte: 0")
-        self.label_fila_sul = tk.Label(self.root, text="Fila Sul: 0")
-        self.label_fila_leste = tk.Label(self.root, text="Fila Leste: 0")
-        self.label_fila_oeste = tk.Label(self.root, text="Fila Oeste: 0")
+        self.label_fila_1 = tk.Label(self.root, text="Fila 1: 0")
+        self.label_fila_2 = tk.Label(self.root, text="Fila 2: 0")
+        self.label_fila_3 = tk.Label(self.root, text="Fila 3: 0")
+        self.label_fila_4 = tk.Label(self.root, text="Fila 4: 0")
 
-        self.label_fila_norte.grid(row=1, column=2, sticky="n", pady=(10, 0))
-        self.label_fila_sul.grid(row=3, column=2, sticky="s", pady=(0, 10))
-        self.label_fila_leste.grid(row=2, column=3, sticky="e", padx=(0, 10))
-        self.label_fila_oeste.grid(row=2, column=1, sticky="w", padx=(10, 0))
+        self.label_fila_1.grid(row=1, column=2, sticky="n", pady=(10, 0))
+        self.label_fila_2.grid(row=3, column=2, sticky="s", pady=(0, 10))
+        self.label_fila_3.grid(row=2, column=3, sticky="e", padx=(0, 10))
+        self.label_fila_4.grid(row=2, column=1, sticky="w", padx=(10, 0))
 
         self.botao_iniciar = tk.Button(self.root, text="Iniciar Simulação", command=self.iniciar_simulacao)
         self.botao_iniciar.grid(row=4, column=0, columnspan=2, pady=10, sticky="e")
@@ -62,21 +62,21 @@ class InterfaceGrafica:
         while self.simulacao_ativa:
             fila_veiculos, semaforos = self.simulacao.simular_tick()
 
-            self.label_fila_norte.config(text=f"Fila Norte: {len(fila_veiculos['Norte'])}")
-            self.label_fila_sul.config(text=f"Fila Sul: {len(fila_veiculos['Sul'])}")
-            self.label_fila_leste.config(text=f"Fila Leste: {len(fila_veiculos['Leste'])}")
-            self.label_fila_oeste.config(text=f"Fila Oeste: {len(fila_veiculos['Oeste'])}")
+            self.label_fila_1.config(text=f"Fila 1: {len(fila_veiculos['1'])}")
+            self.label_fila_2.config(text=f"Fila 2: {len(fila_veiculos['2'])}")
+            self.label_fila_3.config(text=f"Fila 3: {len(fila_veiculos['3'])}")
+            self.label_fila_4.config(text=f"Fila 4: {len(fila_veiculos['4'])}")
 
             for semaforo in semaforos:
                 cor = "green" if semaforo.estado == "aberto" else "red"
-                if semaforo.direcao == 'Norte':
-                    self.label_norte.config(bg=cor)
-                elif semaforo.direcao == 'Sul':
-                    self.label_sul.config(bg=cor)
-                elif semaforo.direcao == 'Leste':
-                    self.label_leste.config(bg=cor)
-                elif semaforo.direcao == 'Oeste':
-                    self.label_oeste.config(bg=cor)
+                if semaforo.direcao == '1':
+                    self.label_1.config(bg=cor)
+                elif semaforo.direcao == '2':
+                    self.label_2.config(bg=cor)
+                elif semaforo.direcao == '3':
+                    self.label_3.config(bg=cor)
+                elif semaforo.direcao == '4':
+                    self.label_4.config(bg=cor)
 
             time.sleep(1)
 
